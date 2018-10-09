@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学生列表</title>
+    <script src="~/Scripts/vue.min.js"></script>
+    <style type="text/css">
+        .bg {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <label>姓名</label> <input type="text" id="name" v-model="name" />
+        <label>性别</label> <input type="text" id="gender" v-model="gender" />
+        <label>年龄</label> <input type="text" id="age" v-model="age" />
+        <label>爱好</label> <input type="text" id="hobby" v-model="hobby" />
+        <button v-on:click="AddStuList">添加</button>
+        <table border="1" cellspacing="5" cellpadding="5" v-show="stuList.length">
+            <caption><h3>学生列表</h3></caption>
+            <tr>
+                <th>状态</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>爱好</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item,index) in stuList" :class="{bg:item.isChecked}">
+                <td><input type="checkbox" name="" id="" value="" v-model="item.isChecked" /></td>
+                <td>{{index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.hobby}}</td>
+                <td><button v-on:click="delStuList(item)">删除</button></td>
+            </tr>
+        </table>
+    </div>  
+   
+    <script>
+        var list = [
+            {
+                name: "张三",
+                gender: "男",
+                age: "12",
+                hobby: "睡觉",
+                isChecked: false
+            },
+            {
+                name: "张三",
+                gender: "男",
+                age: "12",
+                hobby: "睡觉",
+                isChecked: false
+            }
+        ];
+        var vm = new Vue({
+            el: "#demo",
+            data: {
+                stuList: list,
+                name: "",
+                gender: "",
+                age: "",
+                hobby: "",
+                isChecked: ""
+            },
+            methods: {
+                AddStuList: function () {
+                    var stu = {
+                        name: this.name,
+                        gender: this.gender,
+                        age: this.age,
+                        hobby: this.hobby,
+                        isChecked: this.isChecked
+                    }
+                    this.stuList.push(stu);
+                    this.name = '';
+                    this.gender = '';
+                    this.age = '';
+                    this.hobby = '';
+                    isChecked = '';
+                },
+                delStuList: function (item) {
+                    var index = this.stuList.indexOf(item);
+                    this.stuList.splice(index)
+                }
+            }
+        });
+       
+    </script>
+</body>
+</html>
