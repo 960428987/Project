@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@using ProjectDemo.Controllers
+<ul>
+    @foreach(Album a in ViewBag.sss as IEnumerable<Album>)
+    {
+        <li>@a.title</li>
+    }
+</ul>
+<h2>Index</h2>
+
